@@ -28,11 +28,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // *****google Strategy************** 
+// http://localhost:3000/auth/google/secrets
 
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets"
+    callbackURL: "https://safe-beyond-30673.herokuapp.com/auth/google/secrets"
 },
     function (accessToken, refreshToken, profile, cb) {
         user.findOrCreate({ googleId: profile.id, username: profile.displayName }, function (err, user) {
