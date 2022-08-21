@@ -28,7 +28,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // *****google Strategy************** 
-// http://localhost:3000/auth/google/secrets
+// http://localhost:3000/auth/google/secrets "previously i used for local redirect"
 
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
@@ -44,11 +44,12 @@ passport.use(new GoogleStrategy({
 
 
 // ********facebook Strategy *********
+// http://localhost:3000/auth/facebook/secrets "previously i used for local redirect"
 
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/secrets"
+    callbackURL: "https://safe-beyond-30673.herokuapp.com/auth/facebook/secrets"
   },
   function(accessToken, refreshToken, profile, cb) {
     // console.log(profile);
