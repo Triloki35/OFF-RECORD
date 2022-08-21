@@ -58,7 +58,7 @@ passport.use(new FacebookStrategy({
 ));
 
 
-mongoose.connect("mongodb://localhost:27017/userDB");
+mongoose.connect("mongodb+srv://triloki35:"+process.env.DB_PASSWORD+"@cluster0.1fz6j.mongodb.net/userDB");
 
 const userSchema = new mongoose.Schema({
     username: String,
