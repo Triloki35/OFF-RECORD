@@ -133,7 +133,7 @@ app.get("/logout", function (req, res) {
     });
 })
 
-//**** google redirects ****
+//**** google authentication ****
 
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 
@@ -144,10 +144,9 @@ app.get("/auth/google/secrets",
 });
 
 
-//******facebook redirects */
+//******facebook authentication */
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+app.get('/auth/facebook',passport.authenticate('facebook'));
 
 app.get('/auth/facebook/secrets',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
