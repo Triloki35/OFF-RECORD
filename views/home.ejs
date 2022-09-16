@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 
-<div class="jumbotron centered">
+<!-- <div class="jumbotron centered">
   <div class="container">
     <i class="fas fa-key fa-6x"></i>
     <h1 class="display-3">Secrets</h1>
@@ -11,6 +11,35 @@
     <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
 
   </div>
-</div>
+</div> -->
+
+<body id="mybody" class="d-flex text-center text-bg-dark">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-2">Secrets</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link py-1 px-0 active" aria-current="page" href="#">Home</a>
+          <a class="nav-link py-1 px-0" href="#">Features</a>
+          <a class="nav-link py-1 px-0" href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="px-3">
+      <h1>Welcome To Secrets.</h1>
+      <p class="lead">Don't keep your secrets, share them anonymously !!</p>
+      <p class="lead">
+        <a type="button" class="btn btn-lg btn-outline-secondary fw-bold  homeBtn" href="/register">REGISTER</a>
+        <a type="button" class="btn btn-lg btn-outline-light fw-bold homeBtn" href="/login">LOGIN</a>
+      </p>
+    </main>
+
+    <footer class="mt-auto text-white-50">
+      <p>Created by <a href="https://www.linkedin.com/in/triloki-nath-72659b226/" class="text-white">@triloki35</a>.</p>
+    </footer>
+  </div>
+
+</body>
 
 <%- include('partials/footer') %>

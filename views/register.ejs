@@ -1,14 +1,14 @@
 <%- include('partials/header') %>
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <h1>Register</h1>
 
   <div class="row">
     <div class="col-sm-8">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body"> -->
 
           <!-- Makes POST request to /register route -->
-          <form action="/register" method="POST">
+          <!-- <form action="/register" method="POST">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="username">
@@ -40,6 +40,54 @@
     </div>
 
   </div>
-</div>
+</div> -->
+
+
+<body>
+
+  <div class="container ">
+    <br>
+    <h2 class="text-center text-white">Create New Account</h2>
+    <hr id="loginHr">
+    <div class="card bg-transparent border-0">
+      <article class="card-body mx-auto" style="max-width: 400px;">
+        <p>
+          <a id="button1" href="/auth/google" class="btn btn-block btn-social btn-google"><i class="fa fa-google"></i>
+            Register with Google</a>
+          <a id="button2" href="/auth/facebook" class="btn btn-block btn-social btn-facebook"><i
+              class="fa fa-facebook-f"></i> Register with Facebook</a>
+        </p>
+        <p class="divider-text">
+          <span class="bg-light" id="or">OR</span>
+        </p>
+        <form action="/register" method="post">
+          <!-- form-group email// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="username" class="form-control" placeholder="Email address" type="email">
+          </div>
+          <!-- form-group password// -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input name="password" class="form-control" placeholder="Create password" type="password">
+          </div>
+          <!-- form-group register// -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block"> Register </button>
+          </div>
+          <!-- form-group login// -->
+          <p class="text-center text-white">Have an account ? <a href="/login">Log In</a> </p>
+        </form>
+      </article>
+    </div> <!-- card.// -->
+
+  </div>
+
+</body>
+
 
 <%- include('partials/header') %>
