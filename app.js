@@ -126,6 +126,10 @@ app.get("/submit", function (req, res) {
     }
 })
 
+app.get("/features",function(req,res){
+    res.render("features");
+})
+
 app.get("/logout", function (req, res) {
     req.logout(function (err) {
         if (err) { return next(err); }
