@@ -80,6 +80,14 @@ i {
    padding: 0px 5px;
 }
 
+#plusbtn{
+   width: 2.6rem;
+   margin-bottom: 3px;
+}
+#exitbtn{
+   /* width: 2.5rem; */
+}
+
 /* submit css */
 
 #submitdiv submitjumbo{
