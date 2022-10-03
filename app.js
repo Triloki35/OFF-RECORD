@@ -68,6 +68,8 @@ const userSchema = new mongoose.Schema({
     googleId: String,
     facebookId: String,
     secrets: { type: [String], default: null }
+    // like : {type:Number,default:0},
+    // dislile : {type:Number,default:0}
 });
 
 
