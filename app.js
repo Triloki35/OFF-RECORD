@@ -67,9 +67,12 @@ const userSchema = new mongoose.Schema({
     password: String,
     googleId: String,
     facebookId: String,
-    secrets: { type: [String], default: null }
-    // like : {type:Number,default:0},
-    // dislile : {type:Number,default:0}
+    secrets: { type: [String], default: null } 
+    // secretArray : [{
+    //     SingleSecret: String,
+    //     like : Number,
+    //     dislike : Number
+    // }]
 });
 
 
@@ -122,6 +125,7 @@ app.get("/secrets", function (req, res) {
 
 app.get("/submit", function (req, res) {
     if (req.isAuthenticated()) {
+        console.log("enter");
         res.render("submit");
     } else {
         res.redirect("/login");
@@ -199,12 +203,13 @@ app.post("/login", function (req, res) {
 
 app.post("/submit", function (req, res) {
     const newSecret = req.body.secret;
-    // console.log(req.user.username);
+    console.log(newSecret);
+    console.log(req.user.username);
     user.findOne({ username: req.user.username }, function (err, foundUser) {
         if (err) {
             console.log(err);
         } else {
-            // console.log(foundUser.secrets);
+            console.log(foundUser.secrets);
             // foundUser.secrets = newSecret;
             foundUser.secrets.push(newSecret);
             foundUser.save(function () {

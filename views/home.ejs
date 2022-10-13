@@ -1,17 +1,86 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/50d9da7357.js" crossorigin="anonymous"></script>
 
-<!-- <div class="jumbotron centered">
-  <div class="container">
-    <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3">Secrets</h1>
-    <p class="lead">Don't keep your secrets, share them anonymously!</p>
-    <hr>
-    <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
-    <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
+  <link rel="stylesheet" href="css/home.css">
 
-  </div>
-</div> -->
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #mybody {
+      height: 100vh;
+    }
+
+    .homeBtn {
+      margin: 0px 5px;
+    }
+  </style>
+
+</head>
 
 <body id="mybody" class="d-flex text-center text-bg-dark">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -20,15 +89,15 @@
         <h3 class="float-md-start mb-2">Secrets</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
           <a class="nav-link py-1 px-0 active" aria-current="page" href="#">Home</a>
-          <a class="nav-link py-1 px-0" href="/features">Features</a>
-          <a class="nav-link py-1 px-0" href="https://www.linkedin.com/in/triloki-nath-72659b226/">Contact</a>
+          <a class="nav-link py-1 px-0" href="#">Features</a>
+          <a class="nav-link py-1 px-0" href="#">Contact</a>
         </nav>
       </div>
     </header>
 
     <main class="px-3">
-      <h1>Welcome To Secrets.</h1>
-      <p class="lead">Don't keep your secrets, share them anonymously !!</p>
+      <h1 class="auto-type1"></h1>
+      <p class="lead auto-type2"></p>
       <p class="lead">
         <a type="button" class="btn btn-lg btn-outline-secondary fw-bold  homeBtn" href="/register">REGISTER</a>
         <a type="button" class="btn btn-lg btn-outline-light fw-bold homeBtn" href="/login">LOGIN</a>
@@ -40,6 +109,31 @@
     </footer>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    var typed1 = new Typed(".auto-type1",{
+      strings : ["Welcome To Secrets."],
+      typeSpeed:150,
+      backSpeed:150,
+      showCursor:false,
+      loop : false
+    })
+
+    var typed2 = new Typed(".auto-type2",{
+      strings : ["Don't keep your secrets, share them anonymously !!"],
+      typeSpeed:100,
+      startDelay:5000,
+      backDelay:700,
+      backSpeed:100,
+      // fadeOut:true,
+      // fadeOutClass: 'typed-fade-out',
+      // fadeOutDelay:500,
+      showCursor: false,
+      loop : false
+    })
+  </script>
+
+
 </body>
 
-<%- include('partials/footer') %>
+</html>

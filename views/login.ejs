@@ -1,96 +1,105 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
 
-  <!-- <div class="container mt-5">
-  <h1>Login</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/50d9da7357.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <style>
+        body{
+           background-color: rgba(33,37, 41, 1);
+           text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+            box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+            height: 100vh;
+        }
+        .divider-text {
+            position: relative;
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
 
-  <div class="row">
-    <div class="col-sm-8">
-      <div class="card">
-        <div class="card-body"> -->
+        .divider-text span {
+            padding: 7px;
+            font-size: 12px;
+            position: relative;
+            z-index: 2;
+        }
 
-  <!-- Makes POST request to /login route -->
-  <!-- <form action="/login" method="POST">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" name="username">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-dark">Login</button>
-          </form>
+        .divider-text:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            top: 55%;
+            left: 0;
+            z-index: 1;
+        }
 
-        </div>
-      </div>
-    </div>
+        #button1,#button2{
+            color: white;
+        }
 
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-body">
-          <a class="btn btn-block btn-social btn-google" href="/auth/google" role="button">
-            <i class="fab fa-google"></i>
-            Sign Up with Google
-          </a>
-          <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
-            <i class="fab fa-facebook"></i>
-            Sign Up with Facebook
-          </a>
-        </div>
-      </div>
-    </div>
+        #or{
+            border-radius: 50%;
+            text-shadow: none;
+        }
 
-  </div>
-</div> -->
+        #loginHr{
+            border-top: 1px solid rgb(236 225 225 / 26%);
+        }
 
+    </style>
+   
+</head>
 
-
-  <body>
+<body>
 
     <div class="container ">
-      <br>
-      <h2 class="text-center text-white">Create New Account</h2>
-      <hr id="loginHr">
-      <div class="card bg-transparent border-0">
-        <article class="card-body mx-auto" style="max-width: 400px;">
-          <p>
-            <a id="button1" href="/auth/google" class="btn btn-block btn-social btn-google"><i class="fa fa-google"></i>
-              Sign in with Google</a>
-            <a id="button2" href="/auth/facebook" class="btn btn-block btn-social btn-facebook"><i
-                class="fa fa-facebook-f"></i> Sign in with Facebook</a>
-          </p>
-          <p class="divider-text">
-            <span class="bg-light" id="or">OR</span>
-          </p>
-          <form action="/login" method="post">
-            <!-- form-group email// -->
-            <div class="form-group input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-              </div>
-              <input name="username" class="form-control" placeholder="Email address" type="email">
-            </div>
-            <!-- form-group password// -->
-            <div class="form-group input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-              </div>
-              <input name="password" class="form-control" placeholder="Create password" type="password">
-            </div>
-            <!-- form-group register// -->
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block"> Login </button>
-            </div>
-            <!-- form-group login// -->
-            <!-- <p class="text-center text-white">Have an account ? <a href="/login">Log In</a> </p> -->
-          </form>
-        </article>
-      </div> <!-- card.// -->
+        <br>
+        <h2 class="text-center text-white">Login to Account</h2>
+        <hr id="loginHr">
+        <div class="card bg-transparent border-0">
+            <article class="card-body mx-auto" style="max-width: 400px;">
+                <p>
+                    <a id="button1" href="/auth/google" class="btn btn-block btn-social btn-google"><i class="fa fa-google"></i> Sign in with Google</a>
+                    <a id="button2" href="/auth/facebook" class="btn btn-block btn-social btn-facebook"><i class="fa fa-facebook-f"></i> Sign in with Facebook</a>
+                </p>
+                <p class="divider-text">
+                    <span class="bg-light" id="or">OR</span>
+                </p>
+                <form action="/login" method="post">
+                    <!-- form-group email// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input name="username" class="form-control" placeholder="Email address" type="email">
+                    </div> 
+                     <!-- form-group password// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input name="password" class="form-control" placeholder="Create password" type="password">
+                    </div> 
+                     <!-- form-group register// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                    </div> 
+                    <!-- form-group login// -->
+                    <p class="text-center text-white">New here ? <a href="/register">Register</a> </p>
+                </form>
+            </article>
+        </div> <!-- card.// -->
 
     </div>
 
-  </body>
+</body>
 
-
-
-  <%- include('partials/footer') %>
+</html>
