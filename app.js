@@ -50,29 +50,30 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "https://safe-beyond-30673.herokuapp.com/auth/facebook/secrets"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    // console.log(profile);
-    user.findOrCreate({ facebookId: profile.id, username: profile.displayName }, function (err, user) {
-      return cb(err, user);
-    });
-  }
+},
+    function (accessToken, refreshToken, profile, cb) {
+        // console.log(profile);
+        user.findOrCreate({ facebookId: profile.id, username: profile.displayName }, function (err, user) {
+            return cb(err, user);
+        });
+    }
 ));
 
 
-mongoose.connect("mongodb+srv://triloki35:"+process.env.DB_PASSWORD+"@cluster0.1fz6j.mongodb.net/userDB");
+mongoose.connect("mongodb+srv://triloki35:" + process.env.DB_PASSWORD + "@cluster0.1fz6j.mongodb.net/userDB");
 
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     googleId: String,
     facebookId: String,
-    secrets: { type: [String], default: null } 
-    // secretArray : [{
-    //     SingleSecret: String,
-    //     like : Number,
-    //     dislike : Number
-    // }]
+    // secrets: { type: [String], default: null } 
+    secretArray: [{
+        SingleSecret: String,
+        like: { type: Number, default: 0 },
+        dislike: { type: Number, default: 0 },
+        comments: [{ type: [String], default: "No Comments" }]
+    }]
 });
 
 
@@ -114,7 +115,8 @@ app.get("/register", function (req, res) {
 
 app.get("/secrets", function (req, res) {
     if (req.isAuthenticated()) {
-        user.find({ "secrets": { $ne: null } }, function (err, foundUsers) {
+        user.find({ "secretArray": { $ne: null } }, function (err, foundUsers) {
+            // console.log(foundUsers);
             res.render("secrets", { FOUND_USERS: foundUsers });
         })
     }
@@ -132,7 +134,7 @@ app.get("/submit", function (req, res) {
     }
 })
 
-app.get("/features",function(req,res){
+app.get("/features", function (req, res) {
     res.render("features");
 })
 
@@ -143,6 +145,7 @@ app.get("/logout", function (req, res) {
     });
 })
 
+
 //**** google authentication ****
 
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
@@ -151,19 +154,19 @@ app.get("/auth/google/secrets",
     passport.authenticate('google', { failureRedirect: '/login' }),
     function (req, res) {
         res.redirect('/secrets');
-});
+    });
 
 
 //******facebook authentication */
 
-app.get('/auth/facebook',passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/secrets',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/secrets');
-  });
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/secrets');
+    });
 
 app.post("/register", function (req, res) {
 
@@ -203,7 +206,13 @@ app.post("/login", function (req, res) {
 
 app.post("/submit", function (req, res) {
     const newSecret = req.body.secret;
-    console.log(newSecret);
+    const newobj = {
+        SingleSecret: req.body.secret,
+        like: 0,
+        dislike: 0,
+        comments: ["No Comments"]
+    }
+    console.log(newobj);
     console.log(req.user.username);
     user.findOne({ username: req.user.username }, function (err, foundUser) {
         if (err) {
@@ -211,12 +220,60 @@ app.post("/submit", function (req, res) {
         } else {
             console.log(foundUser.secrets);
             // foundUser.secrets = newSecret;
-            foundUser.secrets.push(newSecret);
+
+            foundUser.secretArray.push(newobj);
             foundUser.save(function () {
                 res.redirect("/secrets");
             });
         }
     })
+})
+
+
+// ******************* work under construction ****************************************************************
+// like wala kaam hogya dislike wala dekhna h 
+app.post("/reaction", function (req, res) {
+    // console.log(req.user.username);
+    // console.log(req.body.username);
+    // console.log(req.body.selectedSecret);
+    // console.log(req.body.like);
+    // console.log(req.body.likebtn)
+    // console.log(req.body.dislikebtn);
+    var flag1=false;
+    var flag2=false;
+    if(req.body.likebtn == 1){
+        var newLikeCnt = req.body.like;
+        ++newLikeCnt;
+        flag1 = true;
+    }
+    if(req.body.dislikebtn == 0){
+        var newDisLikeCnt = req.body.dislike;
+        ++newDisLikeCnt;
+        flag2 = true;
+    }
+ 
+    
+    if(flag1){
+        user.updateOne(
+            { 'username':req.body.username,'secretArray.SingleSecret': req.body.selectedSecret}, 
+            {'$set': {'secretArray.$.like': newLikeCnt }}, function(err) { 
+            if(err)
+            console.log(err);
+            else
+            res.redirect("/secrets")
+        })
+    }
+    if(flag2){
+        user.updateOne(
+            { 'username':req.body.username,'secretArray.SingleSecret': req.body.selectedSecret}, 
+            {'$set': {'secretArray.$.dislike': newDisLikeCnt }}, function(err) { 
+            if(err)
+            console.log(err);
+            else
+            res.redirect("/secrets")
+        })
+    }
+    
 })
 
 app.listen(process.env.PORT || 3000, function () {
