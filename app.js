@@ -230,15 +230,9 @@ app.post("/submit", function (req, res) {
 })
 
 
-// ******************* work under construction ****************************************************************
-// like wala kaam hogya dislike wala dekhna h 
+// like dislike section
+
 app.post("/reaction", function (req, res) {
-    // console.log(req.user.username);
-    // console.log(req.body.username);
-    // console.log(req.body.selectedSecret);
-    // console.log(req.body.like);
-    // console.log(req.body.likebtn)
-    // console.log(req.body.dislikebtn);
     var flag1=false;
     var flag2=false;
     if(req.body.likebtn == 1){
