@@ -145,6 +145,34 @@ app.get("/logout", function (req, res) {
     });
 })
 
+app.get("/mysecret", function (req, res) {
+    if (req.isAuthenticated()) {
+        user.find({ username: req.user.username }, function (err, foundUsers) {
+            // console.log(foundUsers[0].secretArray);
+            res.render("mysecret", { FOUND_USERS: foundUsers });
+        })
+    }
+    else {
+        res.redirect("/login");
+    }
+})
+
+app.post("/delete", function (req, res) {
+    const selectedSecret = req.body.secretname;
+    const CurrentUser = req.user.username;
+
+    // console.log(selectedSecret);
+    // console.log(CurrentUser);
+
+    user.updateOne({ username: CurrentUser }, { "$pull": { "secretArray": { "SingleSecret": selectedSecret } } }, { safe: true, multi: true }, function (err, obj) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/mysecret")
+        }
+    });
+})
+
 
 //**** google authentication ****
 
@@ -233,41 +261,41 @@ app.post("/submit", function (req, res) {
 // like dislike section
 
 app.post("/reaction", function (req, res) {
-    var flag1=false;
-    var flag2=false;
-    if(req.body.likebtn == 1){
+    var flag1 = false;
+    var flag2 = false;
+    if (req.body.likebtn == 1) {
         var newLikeCnt = req.body.like;
         ++newLikeCnt;
         flag1 = true;
     }
-    if(req.body.dislikebtn == 0){
+    if (req.body.dislikebtn == 0) {
         var newDisLikeCnt = req.body.dislike;
         ++newDisLikeCnt;
         flag2 = true;
     }
- 
-    
-    if(flag1){
+
+
+    if (flag1) {
         user.updateOne(
-            { 'username':req.body.username,'secretArray.SingleSecret': req.body.selectedSecret}, 
-            {'$set': {'secretArray.$.like': newLikeCnt }}, function(err) { 
-            if(err)
-            console.log(err);
-            else
-            res.redirect("/secrets")
-        })
+            { 'username': req.body.username, 'secretArray.SingleSecret': req.body.selectedSecret },
+            { '$set': { 'secretArray.$.like': newLikeCnt } }, function (err) {
+                if (err)
+                    console.log(err);
+                else
+                    res.redirect("/secrets")
+            })
     }
-    if(flag2){
+    if (flag2) {
         user.updateOne(
-            { 'username':req.body.username,'secretArray.SingleSecret': req.body.selectedSecret}, 
-            {'$set': {'secretArray.$.dislike': newDisLikeCnt }}, function(err) { 
-            if(err)
-            console.log(err);
-            else
-            res.redirect("/secrets")
-        })
+            { 'username': req.body.username, 'secretArray.SingleSecret': req.body.selectedSecret },
+            { '$set': { 'secretArray.$.dislike': newDisLikeCnt } }, function (err) {
+                if (err)
+                    console.log(err);
+                else
+                    res.redirect("/secrets")
+            })
     }
-    
+
 })
 
 app.listen(process.env.PORT || 3000, function () {
