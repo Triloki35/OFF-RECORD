@@ -33,7 +33,7 @@ app.use(passport.session());
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "https://safe-beyond-30673.herokuapp.com/auth/google/secrets"
+    callbackURL: "https://secrets-kqdt.onrender.com/auth/google/secrets"
 },
     function (accessToken, refreshToken, profile, cb) {
         user.findOrCreate({ googleId: profile.id, username: profile.displayName }, function (err, user) {
@@ -49,7 +49,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "https://safe-beyond-30673.herokuapp.com/auth/facebook/secrets"
+    callbackURL: "https://secrets-kqdt.onrender.com/auth/facebook/secrets"
 },
     function (accessToken, refreshToken, profile, cb) {
         // console.log(profile);
